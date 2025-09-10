@@ -1,0 +1,353 @@
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            text-align: center;
+            font-size: 40px;
+            font-weight: bold;
+            margin-top: 20px;
+            background: linear-gradient(90deg, red, orange, yellow, blue, violet, green);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card1, .card2 {
+            background-color: white;
+            border-radius: 15px;
+            width: 600px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+
+        .card2 {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form1 {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .horiz {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .horiz label {
+            width: 150px;
+            flex-shrink: 0;
+        }
+
+        .input1, .input2 {
+            flex: 1;
+            padding: 8px;
+            border-radius: 5px;
+            border: 2px solid rgb(202, 201, 201);
+            font-size: 14px;
+        }
+
+        #customBtn {
+            flex: 1;
+            padding: 8px;
+            font-size: 17px;
+            border-radius: 8px;
+            background-color: rgb(19, 202, 19);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #customBtn:hover {
+            transform: scale(1.05);
+        }
+
+        .input1:focus, .input2:focus {
+            border: 3px solid blue;
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 0, 255, 0.6);
+            transition: 0.3s;
+        }
+
+        #previewImg {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            margin: 20px auto;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .submit, .download {
+            background-color: blue;
+            border-radius: 8px;
+            text-align: center;
+            border: none;
+            color: white;
+            padding: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .download {
+            background-color: red;
+        }
+
+        .submit:hover, .download:hover {
+            transform: scale(1.05);
+        }
+
+        .topic {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .topic img {
+            width: 80px;
+            height: 80px;
+            border-radius: 13px;
+        }
+
+        .namecard {
+            min-height: 80px;
+            color: white;
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(90deg, red, aqua);
+            border-radius: 8px;
+            padding: 10px 0;
+        }
+
+        .namecard h2 {
+            font-size: 40px;
+            text-align: center;
+            margin: 0;
+        }
+
+        .photo {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            margin-top: 20px;
+            background-color: rgb(231, 229, 229);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .photo img.cam {
+            height: 50px;
+            width: 70px;
+        }
+
+        #cardImg {
+            width: 100%;
+            max-width: 550px;
+            height: auto;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .wishcard {
+            text-align: center;
+            border-left: 6px solid orange;
+            background-color: rgb(231, 229, 229);
+            margin: 20px auto 0 auto;
+            max-width: 550px;
+            width: 100%;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .wishcard h2 {
+            font-size: 16px;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .footer1 {
+            background-color: rgb(231, 229, 229);
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .card1, .card2 {
+                width: 100%;
+                max-width: 100%;
+            }
+            .header {
+                font-size: 28px;
+            }
+            .horiz {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .horiz label {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .submit, .download {
+                width: 100%;
+                font-size: 16px;
+            }
+            .topic img {
+                width: 60px;
+                height: 60px;
+            }
+            .namecard h2 {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                font-size: 24px;
+            }
+            .topic img {
+                width: 50px;
+                height: 50px;
+            }
+            .namecard h2 {
+                font-size: 20px;
+            }
+            .wishcard h2 {
+                font-size: 14px;
+            }
+            #previewImg {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="topic">
+        <img src="ml.jpg" alt="Logo">
+        <h1 class="header">BIRTHDAY WISHER</h1>
+    </div>     
+    <div class="container">
+        <div class="card1">
+            <div class="form1">
+                <h2><b>Create Your Card</b></h2>
+                <div class="horiz">
+                    <label class="name" for="name1">Enter Name:</label>
+                    <input type="text" class="input1" id="name1" placeholder="Enter Person's Name">
+                </div>
+                <div class="horiz">
+                    <label class="name" for="wish">Enter Your Wish:</label>
+                    <textarea type="text" class="input2" id="wish" placeholder="Enter your Wish" rows="5"></textarea>
+                </div>
+                <div class="horiz">
+                    <label class="name4" for="photo">Upload a Photo:</label>
+                    <input type="file" id="photo" style="display:none;">
+                    <button type="button" id="customBtn">Choose File</button>
+                </div> 
+                <img id="previewImg">
+                <button type="button" class="submit" id="generateBtn">Generate Birthday Card</button>
+                <button type="button" class="download">Download Generated Card</button>
+            </div>
+        </div>
+
+        <div class="card2">
+            <div class="namecard">
+                <h2>Happy Birthday,</h2>
+            </div>
+            <div class="photo">
+                <img src="cam.png" class="cam">
+                <img id="cardImg">
+            </div>
+            <div class="wishcard">
+                <h2>Your Wish Comes Here!</h2>
+            </div>
+            <div class="footer1">
+                <h4>Made By Birthday Wisher!</h4>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const customBtn = document.getElementById("customBtn");
+        const realFileInput = document.getElementById("photo");
+        const previewImg = document.getElementById("previewImg");
+        const generateBtn = document.getElementById("generateBtn");
+        const downloadBtn = document.querySelector(".download");
+        const cardImg = document.getElementById("cardImg");
+
+        customBtn.addEventListener("click", () => realFileInput.click());
+
+        realFileInput.addEventListener("change", () => {
+            const file = realFileInput.files[0];
+            if(file){
+                previewImg.src = URL.createObjectURL(file);
+                previewImg.style.display = "block";
+            } else {
+                previewImg.style.display = "none";
+            }
+        });
+
+        generateBtn.addEventListener("click", () => {
+            const name = document.getElementById("name1").value.trim();
+            const wish = document.getElementById("wish").value.trim();
+            const photo = realFileInput.files.length > 0;
+
+            if(!name) return alert("Please Enter A Name!");
+            if(!wish) return alert("Please Enter Your Wish!");
+            if(!photo) return alert("Please Upload a Photo");
+
+            document.querySelector(".namecard h2").textContent = "Happy Birthday, " + name + "!";
+            document.querySelector(".wishcard h2").textContent = wish;
+
+            const photoDiv = document.querySelector(".photo");
+            photoDiv.style.backgroundColor = "transparent";
+            const camImage = photoDiv.querySelector(".cam");
+            if(camImage) camImage.remove();
+
+            cardImg.src = previewImg.src;
+            cardImg.style.display = "block";
+        });
+
+        downloadBtn.addEventListener("click", () => {
+            html2canvas(document.querySelector(".card2"), { useCORS: true }).then(canvas => {
+                const link = document.createElement("a");
+                link.download = "Birthday_Card.png";
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+            });
+        });
+    </script>
+</body>
+</html>
